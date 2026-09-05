@@ -1,0 +1,36 @@
+# stn18
+colnames1_stn18 = ["H9448DA02_X", "H9448DA02_Y"]  
+colnames2_stn18 = ["L9448DA01_X"]
+
+colnames3_stn18 = ["F9393A792_Y", "F9393A792_Z"]
+colnames4_stn18 = ["F9392A792_Y", "F9392A792_Z"]
+colnames5_stn18 = ["G9393A792_Y"]
+colnames6_stn18 = ["G9392A792_Y"]
+
+colnames7_stn18 = ["F9393A796_X"]
+colnames8_stn18 = ["F9392A796_X"]
+colnames9_stn18 = ["G9393A796_Y"]
+colnames10_stn18 = ["G9392A796_Y"]
+
+colnames_liftgate_stn18 = colnames1_stn18 + colnames2_stn18 + colnames3_stn18 + colnames4_stn18 + colnames5_stn18 + colnames6_stn18 
+
+# stn08
+colnames1_stn08 = ["H9451DA01_X", "H9451DA01_Y", "H9451DA01_Z"]  # 
+colnames2_stn08 = ["L9451DA02_X", "L9451DA02_Z"]                 # 
+colnames3_stn08 = ["L9392MA01_Z"]                                # 
+colnames4_stn08 = ["L9393MA01_Z"]                                # 
+
+colnames_liftgate_stn08 = colnames1_stn08 + colnames2_stn08 + colnames3_stn08 + colnames4_stn08 
+
+# biwpc
+colnames1_biwpc = ["FB33A033_D", "GB32A033_D"]
+colnames2_biwpc = ["FB33A001_D", "GB32A001_D"]
+colnames3_biwpc = ["FB33A037R_D", "GB32A0037R_D"]
+
+colnames4_biwpc = ["GB22A796R_D"] # "FB23A796R_D"
+colnames5_biwpc = ["FB23A797_D", "GB22A797_D"]
+
+colnames6_biwpc = ["H8029M029Y_Y", "H8029M029Z_Z"]
+colnames7_biwpc = ["H8029M003Y_Y", "H8029M003Z_Z"]
+
+colnames_liftgate_biwpc = colnames1_biwpc + colnames2_biwpc + colnames3_biwpc + colnames4_biwpc + colnames5_biwpc #+ colnames6 + colnames7
