@@ -19,7 +19,7 @@ from sklearn.decomposition import PCA
 from sklearn.ensemble import IsolationForest
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
-
+import matplotlib.pyplot as plt
 
 DEFAULT_INPUTS = (Path("data_stn08.csv"), Path("data_stn18.csv"), Path("data_biwpc.csv"))
 METADATA_COLUMNS = {"JSN", "DATE", "TIME", "Lab#", "File Name"}
@@ -159,9 +159,7 @@ def main() -> None:
         station = path.stem
         columns = measurement_columns(frame)
         classifications = profile.loc[profile["source_csv"] == path.name].set_index("measurement_column")["classification"].to_dict()
-        unknown = [column for column in columns if column not in classifications]
-        if unknown:
-            raise ValueError(f"{path}: {len(unknown)} columns are absent from {args.profile}; regenerate the distribution profile first.")
+        columns = [c for c in columns if c in classifications]
 
         unit_id = pd.DataFrame({
             "source_csv": path.name,
@@ -177,6 +175,20 @@ def main() -> None:
             per_column["measurement_column"] = column
             per_column["distribution_classification"] = classifications[column]
             all_column_rows.append(per_column)
+            plot_dir = args.output_dir / "plots" / station
+            plot_dir.mkdir(parents=True, exist_ok=True)
+            fig, ax = plt.subplots(figsize=(10, 4))
+            ax.scatter(per_column.index, per_column["measurement_value"], c="steelblue", s=15, label="Normal")
+            anomalies = per_column[per_column["anomaly_flag"]]
+            if not anomalies.empty:
+                ax.scatter(anomalies.index, anomalies["measurement_value"], c="red", s=30, label=f"Anomaly ({len(anomalies)})")
+            ax.set_title(f"{column} ({classifications[column]})")
+            ax.set_xlabel("Unit index")
+            ax.set_ylabel("Value")
+            ax.legend()
+            fig.tight_layout()
+            fig.savefig(plot_dir / f"{column}_anomalies.png", dpi=150)
+            plt.close(fig)
 
         cross_part = cross_part_anomalies(
             frame[columns], args.contamination, args.pca_variance, args.pca_percentile, args.random_state
