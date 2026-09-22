@@ -1,0 +1,17 @@
+=== Forecast / Trend Summary ===
+Analysed 3 station files.
+Columns with rising drift (>5% mean shift): 8
+Columns with falling drift (>5% mean shift): 3
+Columns with stable mean: 18
+
+Columns with notable upward drift:
+  data_stn08/L9393MA01_Z: 54.1% drift, 30 EWMA OOC points
+  data_stn08/L9392MA01_Z: 28.7% drift, 55 EWMA OOC points
+  data_stn18/L9448DA01_X: 23.9% drift, 33 EWMA OOC points
+  data_stn18/F9392A792_Z: 18.5% drift, 135 EWMA OOC points
+  data_stn18/F9392A796_X: 17.7% drift, 155 EWMA OOC points
+  data_stn08/H9451DA01_Z: 17.4% drift, 93 EWMA OOC points
+  data_stn08/L9451DA02_Z: 13.0% drift, 45 EWMA OOC points
+  data_stn08/H9451DA01_Y: 7.8% drift, 86 EWMA OOC points
+
+Anomaly-rate trends should be inspected in the rolling plots under forecast_output/plots/

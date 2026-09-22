@@ -1,0 +1,14 @@
+=== DoWhy Causal Demo: Side-Grouped Anomalies ===
+
+
+Questions tested: 8
+  stn08 L → stn18 L: ATE=0.0069
+  stn08 R → stn18 R: ATE=-0.075
+  stn18 L → biwpc L: ATE=0.0727
+  stn18 R → biwpc R: ATE=-0.0012
+  stn08 L → biwpc L: ATE=0.0565
+  stn08 R → biwpc R: ATE=-0.03
+  stn18 L → biwpc C: ATE=0.0104
+  stn18 R → biwpc C: ATE=0.0069
+
+DISCLAIMER: Demonstration only — no validated root-cause labels.
