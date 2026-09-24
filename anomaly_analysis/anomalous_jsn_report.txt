@@ -1,0 +1,38 @@
+=== Anomalous JSNs by Station ===
+
+data_stn08_common_jsn (9 anomalous):
+  JSN 97054852 — PCA (score=0.8376)
+  JSN 97078315 — IF (score=0.9797)
+  JSN 97053631 — IF (score=0.8930)
+  JSN 97069249 — PCA (score=0.9871)
+  JSN 97056733 — IF (score=0.8376)
+  JSN 97055644 — IF (score=0.7399)
+  JSN 97058440 — IF (score=0.9207)
+  JSN 97059703 — PCA (score=0.9815)
+  JSN 97047567 — IF (score=0.9096)
+
+data_stn18_common_jsn (8 anomalous):
+  JSN 97054860 — PCA (score=0.9361)
+  JSN 97054852 — PCA (score=0.8504)
+  JSN 97047500 — IF (score=0.9015)
+  JSN 97077283 — Both (score=0.9891)
+  JSN 97053813 — IF (score=0.9580)
+  JSN 97053631 — IF (score=0.6004)
+  JSN 97056741 — IF (score=0.6843)
+  JSN 97055644 — IF (score=0.9909)
+
+data_biwpc_common_jsn (9 anomalous):
+  JSN 97077317 — IF (score=0.9539)
+  JSN 97053490 — PCA (score=0.9649)
+  JSN 97056303 — PCA (score=0.7232)
+  JSN 97056501 — PCA (score=0.7860)
+  JSN 97055644 — IF (score=0.9446)
+  JSN 97060198 — IF (score=0.6771)
+  JSN 97060131 — IF (score=0.9114)
+  JSN 97060289 — IF (score=0.5295)
+  JSN 97059901 — IF (score=0.9539)
+
+=== JSNs Flagged at Multiple Stations (3) ===
+  JSN 97053631: data_stn08_common_jsn, data_stn18_common_jsn
+  JSN 97054852: data_stn08_common_jsn, data_stn18_common_jsn
+  JSN 97055644: data_biwpc_common_jsn, data_stn08_common_jsn, data_stn18_common_jsn

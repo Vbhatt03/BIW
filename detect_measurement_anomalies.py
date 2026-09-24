@@ -21,7 +21,11 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 
-DEFAULT_INPUTS = (Path("data_stn08.csv"), Path("data_stn18.csv"), Path("data_biwpc.csv"))
+DEFAULT_INPUTS = (
+    Path("common_jsn_output/data_stn08_common_jsn.csv"),
+    Path("common_jsn_output/data_stn18_common_jsn.csv"),
+    Path("common_jsn_output/data_biwpc_common_jsn.csv"),
+)
 METADATA_COLUMNS = {"JSN", "DATE", "TIME", "Lab#", "File Name"}
 
 
@@ -208,6 +212,29 @@ def main() -> None:
         .agg(units=("JSN", "size"), iforest_anomaly_rate=("iforest_anomaly_flag", "mean"), pca_anomaly_rate=("pca_anomaly_flag", "mean"), composite_anomaly_rate=("composite_anomaly_flag", "mean"))
         .reset_index()
     )
+
+    anom = unit_level[unit_level["composite_anomaly_flag"]].copy()
+    anom["caught_by"] = anom.apply(
+        lambda r: "IF" if r["iforest_anomaly_flag"] and not r["pca_anomaly_flag"]
+        else "PCA" if r["pca_anomaly_flag"] and not r["iforest_anomaly_flag"]
+        else "Both", axis=1
+    )
+
+    report = ["=== Anomalous JSNs by Station ==="]
+    for stn in anom["station"].unique():
+        sub = anom[anom["station"] == stn]
+        report.append(f"\n{stn} ({len(sub)} anomalous):")
+        for _, r in sub.iterrows():
+            report.append(f"  JSN {r['JSN']} — {r['caught_by']} (score={r['composite_anomaly_score']:.4f})")
+
+    multi = anom.groupby("JSN").filter(lambda g: g["station"].nunique() > 1)
+    if not multi.empty:
+        multi_counts = multi.groupby("JSN")["station"].apply(lambda x: ", ".join(sorted(x.unique()))).reset_index()
+        report.append(f"\n=== JSNs Flagged at Multiple Stations ({len(multi_counts)}) ===")
+        for _, r in multi_counts.iterrows():
+            report.append(f"  JSN {r['JSN']}: {r['station']}")
+
+    (args.output_dir / "anomalous_jsn_report.txt").write_text("\n".join(report))
 
     unit_column.to_csv(args.output_dir / "unit_by_column_anomalies.csv", index=False)
     unit_level.to_csv(args.output_dir / "unit_level_composite_anomalies.csv", index=False)
